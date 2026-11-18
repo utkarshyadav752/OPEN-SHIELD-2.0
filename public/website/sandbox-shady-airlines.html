@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ShadyAirlines — Final Checkout</title>
+  <link rel="stylesheet" href="../extension/styles.css" />
+  <style>
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      max-width: 680px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #f8fafc;
+      color: #1e293b;
+    }
+    .card {
+      background: #fff;
+      padding: 24px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      margin-bottom: 20px;
+    }
+    .urgency-banner {
+      background: #fef2f2;
+      color: #b91c1c;
+      padding: 12px;
+      border-radius: 8px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .big-green-btn {
+      background: #16a34a;
+      color: white;
+      padding: 16px 28px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 800;
+      cursor: pointer;
+      width: 100%;
+    }
+    .tiny-shame-link {
+      display: block;
+      text-align: center;
+      margin-top: 10px;
+      font-size: 10px;
+      color: #cbd5e1;
+      text-decoration: none;
+    }
+    .tos-box {
+      font-size: 11px;
+      color: #64748b;
+      background: #f1f5f9;
+      padding: 12px;
+      border-radius: 6px;
+      margin-top: 16px;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>✈️ ShadyAirlines Checkout: New Delhi → London</h2>
+    <p class="urgency-banner">🔥 Hurry! Offer expires in 00:04:59 — 38 people are viewing this flight right now!</p>
+    <p><strong>Only 1 left in stock at this price (₹42,999)!</strong></p>
+
+    <hr style="margin: 18px 0; border-color: #e2e8f0;" />
+
+    <div>
+      <label>
+        <input type="checkbox" checked />
+        Add ₹2,499 VIP Baggage Protection (Recommended)
+      </label>
+    </div>
+    <div style="margin-top: 8px;">
+      <label>
+        <input type="checkbox" checked />
+        Auto-enroll me in ShadyClub Gold for ₹999/month after 7 days
+      </label>
+    </div>
+
+    <div style="margin-top: 24px;">
+      <button class="big-green-btn">YES! Protect My Trip &amp; Pay Now</button>
+      <a href="#decline" class="tiny-shame-link">No thanks, I prefer to pay full price and risk losing my luggage</a>
+    </div>
+
+    <div class="tos-box">
+      <strong>Terms of Service Summary:</strong> By clicking pay, your membership will auto-renew automatically each month. All bookings are strictly non-refundable under any circumstances. You agree to binding arbitration and waive class action rights. We may sell third-party marketing partners your location and browsing history, and grant us an irrevocable, perpetual license to your travel photos.
+    </div>
+  </div>
+  <script src="../extension/constants.js"></script>
+  <script src="../extension/content.js"></script>
+</body>
+</html>

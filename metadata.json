@@ -1,0 +1,8 @@
+{
+  "name": "Remix OpenShield — Dark Pattern \u0026 Predatory Terms Buster",
+  "description": "100% open-source, client-side browser extension and interactive sandbox that exposes deceptive UI dark patterns, grades Terms of Service, and neutralizes sneaky traps.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

@@ -1,0 +1,134 @@
+{
+  "entities": {
+    "AuditRecord": {
+      "title": "AuditRecord",
+      "description": "A user-saved dark pattern and Terms of Service audit report for a domain.",
+      "type": "object",
+      "properties": {
+        "ownerUid": {
+          "type": "string",
+          "description": "UID of the authenticated user who owns this audit record.",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "domain": {
+          "type": "string",
+          "description": "Audited website domain or service name.",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "grade": {
+          "type": "string",
+          "description": "Computed OpenShield safety grade from A to F.",
+          "enum": ["A", "B", "C", "D", "F"],
+          "minLength": 1,
+          "maxLength": 2
+        },
+        "issuesFound": {
+          "type": "integer",
+          "description": "Total number of dark patterns and ToS red flags detected."
+        },
+        "summary": {
+          "type": "string",
+          "description": "Human-readable audit summary.",
+          "minLength": 1,
+          "maxLength": 500
+        },
+        "status": {
+          "type": "string",
+          "description": "Lifecycle state of the saved audit.",
+          "enum": ["active", "archived"],
+          "minLength": 6,
+          "maxLength": 16
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when the audit was created."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when the audit was last updated."
+        }
+      },
+      "required": [
+        "ownerUid",
+        "domain",
+        "grade",
+        "issuesFound",
+        "summary",
+        "status",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "UserReview": {
+      "title": "UserReview",
+      "description": "A user's Chrome Web Store extension rating and review.",
+      "type": "object",
+      "properties": {
+        "ownerUid": {
+          "type": "string",
+          "description": "UID of the authenticated reviewer.",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "authorName": {
+          "type": "string",
+          "description": "Public display name of the reviewer.",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "rating": {
+          "type": "integer",
+          "description": "Star rating from 1 to 5."
+        },
+        "comment": {
+          "type": "string",
+          "description": "Review text body.",
+          "minLength": 1,
+          "maxLength": 600
+        },
+        "status": {
+          "type": "string",
+          "description": "Review status.",
+          "enum": ["published", "archived"],
+          "minLength": 8,
+          "maxLength": 16
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when the review was created."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when the review was last updated."
+        }
+      },
+      "required": [
+        "ownerUid",
+        "authorName",
+        "rating",
+        "comment",
+        "status",
+        "createdAt",
+        "updatedAt"
+      ]
+    }
+  },
+  "firestore": {
+    "/users/{userId}/audits/{auditId}": {
+      "schema": { "$ref": "#/entities/AuditRecord" },
+      "description": "Stores private dark pattern and ToS audit reports owned by a specific user."
+    },
+    "/users/{userId}/reviews/{reviewId}": {
+      "schema": { "$ref": "#/entities/UserReview" },
+      "description": "Stores Chrome Web Store extension reviews authored by a specific user."
+    }
+  }
+}

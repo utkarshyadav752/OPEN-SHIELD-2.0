@@ -1,0 +1,138 @@
+{
+  "dataset_version": "2026.10",
+  "sources": [
+    "Princeton WebTap Dark Patterns Dataset (aruneshmathur/dark-patterns)",
+    "DPBH EthiGuard Taxonomy (XRegiGigaSX/DarkPatternBusterHackathon_EthiGuard)",
+    "Dapde Pattern Highlighter (Dapde/Pattern-Highlighter)",
+    "Consent-O-Matic Visual Interference Rules (cavi-au/Consent-O-Matic)",
+    "ToS;DR & Terms of Service Corpus (tosdr/browser-extensions & sonu-gupta/tosdr-terms-of-service-corpus)"
+  ],
+  "taxonomies": [
+    {
+      "id": "urgency",
+      "name": "Fake Urgency & Countdown Pressure",
+      "academic_source": "Mathur et al. (Princeton CHI 2019) / Dapde",
+      "severity": "high",
+      "badge_color": "#f97316",
+      "description": "Imposes an artificial or resetting deadline on a sale or reservation to accelerate user decision-making.",
+      "signatures": [
+        {
+          "id": "URG-01",
+          "name": "Countdown Timer Pattern",
+          "regex": "\\b\\d{1,2}:\\d{2}:\\d{2}\\b|\\b\\d{1,2}\\s*m(in(ute)?s?)?\\s*\\d{1,2}\\s*s(ec(ond)?s?)?\\b",
+          "example": "Offer expires in 00:04:59"
+        },
+        {
+          "id": "URG-02",
+          "name": "Expiring Deal Phrase",
+          "regex": "offer expires in|deal ends in|flash sale ends|price expires in|limited[- ]time offer",
+          "example": "Hurry! Offer expires in 5 minutes"
+        },
+        {
+          "id": "URG-03",
+          "name": "High-Pressure Action Prompt",
+          "regex": "hurry!|act fast|last chance to book|book now before prices rise|don't miss out",
+          "example": "Last chance to book at this fare!"
+        }
+      ]
+    },
+    {
+      "id": "scarcity",
+      "name": "Artificial Scarcity",
+      "academic_source": "Mathur et al. (Princeton CHI 2019)",
+      "severity": "high",
+      "badge_color": "#f59e0b",
+      "description": "Signals limited availability of a digital or abundant item to inflate perceived value.",
+      "signatures": [
+        {
+          "id": "SCR-01",
+          "name": "Low Stock Claim",
+          "regex": "only \\d+ left( in stock| at this price| on our site)?|almost gone|selling fast",
+          "example": "Only 1 left in stock at this price (₹42,999)!"
+        },
+        {
+          "id": "SCR-02",
+          "name": "High Demand Depletion Claim",
+          "regex": "in high demand|9[0-9]% of rooms booked|sold out soon|limited seats remaining",
+          "example": "In high demand — 98% of seats booked on this route"
+        }
+      ]
+    },
+    {
+      "id": "social_proof",
+      "name": "Manipulative Social Proof & Activity Messages",
+      "academic_source": "Mathur et al. (Princeton CHI 2019) / DPBH EthiGuard",
+      "severity": "medium",
+      "badge_color": "#06b6d4",
+      "description": "Displays unverified or fabricated real-time viewer counts and recent purchases to trigger herd behavior.",
+      "signatures": [
+        {
+          "id": "SOC-01",
+          "name": "Concurrent Viewer Pressure",
+          "regex": "\\d+ people are (viewing|looking at|booking|watching) this",
+          "example": "38 people are viewing this flight right now!"
+        },
+        {
+          "id": "SOC-02",
+          "name": "Recent Purchase Ticker",
+          "regex": "\\d+ (people|travelers|customers) (bought|booked|purchased) this in the last",
+          "example": "42 people bought this in the last hour"
+        }
+      ]
+    },
+    {
+      "id": "sneaking",
+      "name": "Sneaking & Pre-Selected Add-Ons",
+      "academic_source": "Brignull / DPBH EthiGuard / EU Digital Services Act Art. 25",
+      "severity": "critical",
+      "badge_color": "#ef4444",
+      "description": "Sneaks extra paid items, recurring subscriptions, or data sharing into the basket via pre-checked boxes or hidden drip fees.",
+      "signatures": [
+        {
+          "id": "SNK-01",
+          "name": "Pre-Checked Opt-In Checkbox",
+          "dom_selector": "input[type='checkbox'][checked]",
+          "example": "<input type='checkbox' checked /> Add ₹2,499 VIP Baggage Protection"
+        },
+        {
+          "id": "SNK-02",
+          "name": "Hidden Trial-to-Paid Conversion",
+          "regex": "auto[- ]?enroll.*for [₹$€£]\\d+|after \\d+ days you will be charged|automatically billed",
+          "example": "Auto-enroll me in ShadyClub Gold for ₹999/month after 7 days"
+        },
+        {
+          "id": "SNK-03",
+          "name": "Drip Pricing Convenience Fee",
+          "regex": "mandatory (service|convenience|processing|carrier) fee|non[- ]optional surcharge",
+          "example": "Includes mandatory ₹1,250 carrier convenience surcharge"
+        }
+      ]
+    },
+    {
+      "id": "confirm_shaming",
+      "name": "Confirm-Shaming & Visual Interference",
+      "academic_source": "Mathur et al. / Consent-O-Matic styleFilter",
+      "severity": "high",
+      "badge_color": "#a855f7",
+      "description": "Manipulates users into opting in by wording the decline option to induce guilt and styling it with low contrast or tiny typography.",
+      "signatures": [
+        {
+          "id": "SHM-01",
+          "name": "Guilt-Inducing Opt-Out Copy",
+          "regex": "no thanks,?\\s*i (don't|do not) (want|like)|no,?\\s*i prefer to pay full price|i hate saving money|continue without protection|no thanks,?\\s*i'll risk it|risk losing my luggage",
+          "example": "No thanks, I prefer to pay full price and risk losing my luggage"
+        },
+        {
+          "id": "SHM-02",
+          "name": "Asymmetric Button Visual Interference (Consent-O-Matic Rule)",
+          "style_filter": {
+            "max_font_size_px": 12,
+            "min_primary_to_secondary_area_ratio": 3.0,
+            "low_contrast_threshold": 3.0
+          },
+          "example": "18px bold green primary CTA vs. 10px #cbd5e1 muted grey opt-out link"
+        }
+      ]
+    }
+  ]
+}

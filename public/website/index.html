@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OpenShield — Real-Time Dark Pattern &amp; Predatory Terms Buster</title>
+  <link rel="stylesheet" href="../extension/styles.css" />
+  <link rel="stylesheet" href="website.css" />
+</head>
+<body>
+  <header class="topbar">
+    <a href="#" class="brand">OpenShield</a>
+    <nav class="nav-links">
+      <a href="#sandbox">Judge Sandbox</a>
+      <a href="#architecture">Architecture</a>
+      <a href="#matrix">Competitor Matrix</a>
+      <a href="sandbox-shady-airlines.html">Standalone Demo</a>
+    </nav>
+    <button id="simScanBtn" class="btn-primary">Run Live Audit</button>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <h1>Exposing Deceptive UI &amp; Predatory Terms in Real Time</h1>
+      <p style="color: #94a3b8; max-width: 720px;">
+        100% open-source, zero-telemetry browser guard uniting ToS;DR, Dapde Pattern Highlighter,
+        Consent-O-Matic computedStyle auditing, JustDeleteMe Roach Motel intelligence, and the Princeton Dark Patterns corpus.
+      </p>
+    </section>
+
+    <section id="sandbox" class="sandbox-grid">
+      <div id="shadySandboxRoot" class="surface-card" style="background: #ffffff; color: #1e293b;">
+        <h2 style="margin-top: 0;">✈️ ShadyAirlines Checkout: New Delhi → London</h2>
+        <p data-demo-urgency style="background: #fef2f2; color: #b91c1c; padding: 12px; border-radius: 8px; font-weight: 700;">
+          🔥 Hurry! Offer expires in 00:04:59 — 38 people are viewing this flight right now!
+        </p>
+        <p data-demo-urgency><strong>Only 1 left in stock at this price (₹42,999)!</strong></p>
+        <hr style="margin: 18px 0; border-color: #e2e8f0;" />
+        <div data-demo-sneaky style="margin-bottom: 8px;">
+          <label><input type="checkbox" checked /> Add ₹2,499 VIP Baggage Protection (Recommended)</label>
+        </div>
+        <div data-demo-sneaky>
+          <label><input type="checkbox" checked /> Auto-enroll me in ShadyClub Gold for ₹999/month after 7 days</label>
+        </div>
+        <div style="margin-top: 24px;">
+          <button style="background: #16a34a; color: #fff; width: 100%; padding: 14px; border: none; border-radius: 8px; font-weight: 800; font-size: 16px;">
+            YES! Protect My Trip &amp; Pay Now
+          </button>
+          <a href="#decline" data-demo-shaming style="display: block; text-align: center; margin-top: 10px; font-size: 10px; color: #cbd5e1; text-decoration: none;">
+            No thanks, I prefer to pay full price and risk losing my luggage
+          </a>
+        </div>
+        <div style="font-size: 11px; color: #64748b; background: #f1f5f9; padding: 12px; border-radius: 6px; margin-top: 16px;">
+          <strong>Terms of Service Summary:</strong> By clicking pay, your membership will
+          <span data-demo-tos>auto-renew automatically</span> each month. All bookings are
+          <span data-demo-tos>strictly non-refundable under any circumstances</span>. You agree to
+          <span data-demo-tos>binding arbitration and waive class action</span> rights. We may
+          <span data-demo-tos>sell third-party marketing partners</span> your location and browsing history, and grant us an
+          <span data-demo-tos>irrevocable, perpetual license</span> to your travel photos.
+        </div>
+      </div>
+
+      <aside class="surface-card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+          <div>
+            <strong style="font-size: 16px; color: #38bdf8;">🛡️ OpenShield Popup</strong>
+            <div style="font-size: 12px; color: #94a3b8;">100% Local DOM &amp; ToS Auditor</div>
+          </div>
+          <span id="simGrade" style="font-size: 22px; font-weight: 900; padding: 4px 14px; border-radius: 8px; background: #ef4444; color: #fff;">F</span>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 16px;">
+          <div style="background: #1e293b; padding: 10px; border-radius: 8px;">
+            <strong id="simUrgency" style="font-size: 20px; color: #f87171; display: block;">2</strong>
+            <span style="font-size: 12px;">⏳ Fake Urgency</span>
+          </div>
+          <div style="background: #1e293b; padding: 10px; border-radius: 8px;">
+            <strong id="simSneaky" style="font-size: 20px; color: #f87171; display: block;">2</strong>
+            <span style="font-size: 12px;">☑️ Sneaky Boxes</span>
+          </div>
+          <div style="background: #1e293b; padding: 10px; border-radius: 8px;">
+            <strong id="simShaming" style="font-size: 20px; color: #f87171; display: block;">1</strong>
+            <span style="font-size: 12px;">🎭 Guilt-Trip UI</span>
+          </div>
+          <div style="background: #1e293b; padding: 10px; border-radius: 8px;">
+            <strong id="simTos" style="font-size: 20px; color: #f87171; display: block;">5</strong>
+            <span style="font-size: 12px;">📜 ToS Red Flags</span>
+          </div>
+        </div>
+        <ul id="simFindingsList" style="font-size: 12px; padding-left: 18px; color: #cbd5e1; margin-bottom: 16px;"></ul>
+        <button id="simNeutralizeBtn" class="btn-primary" style="width: 100%; padding: 12px;">⚡ Neutralize All Dark Patterns</button>
+        <button id="simResetBtn" style="width: 100%; margin-top: 8px; background: transparent; color: #94a3b8; border: 1px solid #334155; padding: 8px; border-radius: 8px; cursor: pointer;">Reset Sandbox</button>
+      </aside>
+    </section>
+
+    <section id="matrix" class="surface-card" style="margin-bottom: 64px;">
+      <h2 style="margin-top: 0;">Open-Source Ecosystem Synthesis &amp; Competitor Matrix</h2>
+      <table class="matrix-table">
+        <thead>
+          <tr>
+            <th>Capability</th>
+            <th>ToS;DR</th>
+            <th>Dapde Highlighter</th>
+            <th>Consent-O-Matic</th>
+            <th>JustDeleteMe</th>
+            <th>OpenShield (Unified)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Live Unrated ToS Clause NLP/Regex Scan</td>
+            <td>Manual Curation Only</td>
+            <td>No</td>
+            <td>No</td>
+            <td>No</td>
+            <td><strong>Yes (Hybrid Pre-Rated + Live Scan)</strong></td>
+          </tr>
+          <tr>
+            <td>Throttled MutationObserver DOM Tracking</td>
+            <td>No</td>
+            <td>Yes</td>
+            <td>Partial</td>
+            <td>No</td>
+            <td><strong>Yes (Real-Time Timer &amp; Stock Audit)</strong></td>
+          </tr>
+          <tr>
+            <td>ComputedStyle Visual Interference Check</td>
+            <td>No</td>
+            <td>No</td>
+            <td>Cookie Banners Only</td>
+            <td>No</td>
+            <td><strong>Yes (Full Checkout CTA Asymmetry)</strong></td>
+          </tr>
+          <tr>
+            <td>Roach Motel Cancellation Deep-Links</td>
+            <td>No</td>
+            <td>No</td>
+            <td>No</td>
+            <td>Directory Only</td>
+            <td><strong>Yes (In-Popup 1-Click Unsubscribe)</strong></td>
+          </tr>
+          <tr>
+            <td>1-Click Active DOM Neutralizer</td>
+            <td>No</td>
+            <td>Highlight Only</td>
+            <td>Cookie Consent Only</td>
+            <td>No</td>
+            <td><strong>Yes (Unchecks, Equalizes, Freezes)</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+  <script src="website.js"></script>
+</body>
+</html>

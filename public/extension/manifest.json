@@ -1,0 +1,44 @@
+{
+  "manifest_version": 3,
+  "name": "OpenShield — Real-Time Dark Pattern & Predatory Terms Buster",
+  "short_name": "OpenShield",
+  "version": "1.0.0",
+  "description": "100% open-source, client-side guard that exposes deceptive UI dark patterns, grades Terms of Service, checks Roach Motel cancellation difficulty, and neutralizes sneaky traps.",
+  "author": "OpenShield Open-Source Collective",
+  "homepage_url": "https://github.com/openshield-org/openshield",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "OpenShield Consumer Defense Audit"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": [
+        "constants.js",
+        "content.js"
+      ],
+      "css": ["styles.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "sites.json",
+        "rules/dark-patterns-dataset.json"
+      ],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "openshield@consumerdefense.org",
+      "strict_min_version": "109.0"
+    }
+  }
+}

@@ -1,0 +1,135 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Global default-deny safety net
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isSignedIn() {
+      return request.auth != null && request.auth.token.email_verified == true;
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() >= 1 && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function isValidAuditRecord(data) {
+      return data.keys().hasAll([
+        'ownerUid',
+        'domain',
+        'grade',
+        'issuesFound',
+        'summary',
+        'status',
+        'createdAt',
+        'updatedAt'
+      ]) &&
+      data.keys().hasOnly([
+        'ownerUid',
+        'domain',
+        'grade',
+        'issuesFound',
+        'summary',
+        'status',
+        'createdAt',
+        'updatedAt'
+      ]) &&
+      data.ownerUid is string &&
+      data.ownerUid.size() >= 1 &&
+      data.ownerUid.size() <= 128 &&
+      data.ownerUid.matches('^[a-zA-Z0-9_\\-]+$') &&
+      data.ownerUid == request.auth.uid &&
+      data.domain is string &&
+      data.domain.size() >= 1 &&
+      data.domain.size() <= 160 &&
+      data.grade is string &&
+      data.grade.size() >= 1 &&
+      data.grade.size() <= 2 &&
+      data.grade in ['A', 'B', 'C', 'D', 'F'] &&
+      data.issuesFound is int &&
+      data.issuesFound >= 0 &&
+      data.issuesFound <= 500 &&
+      data.summary is string &&
+      data.summary.size() >= 1 &&
+      data.summary.size() <= 500 &&
+      data.status is string &&
+      data.status.size() >= 6 &&
+      data.status.size() <= 16 &&
+      data.status in ['active', 'archived'] &&
+      data.createdAt is timestamp &&
+      data.updatedAt is timestamp;
+    }
+
+    function isValidUserReview(data) {
+      return data.keys().hasAll([
+        'ownerUid',
+        'authorName',
+        'rating',
+        'comment',
+        'status',
+        'createdAt',
+        'updatedAt'
+      ]) &&
+      data.keys().hasOnly([
+        'ownerUid',
+        'authorName',
+        'rating',
+        'comment',
+        'status',
+        'createdAt',
+        'updatedAt'
+      ]) &&
+      data.ownerUid is string &&
+      data.ownerUid.size() >= 1 &&
+      data.ownerUid.size() <= 128 &&
+      data.ownerUid.matches('^[a-zA-Z0-9_\\-]+$') &&
+      data.ownerUid == request.auth.uid &&
+      data.authorName is string &&
+      data.authorName.size() >= 1 &&
+      data.authorName.size() <= 80 &&
+      data.rating is int &&
+      data.rating >= 1 &&
+      data.rating <= 5 &&
+      data.comment is string &&
+      data.comment.size() >= 1 &&
+      data.comment.size() <= 600 &&
+      data.status is string &&
+      data.status.size() >= 8 &&
+      data.status.size() <= 16 &&
+      data.status in ['published', 'archived'] &&
+      data.createdAt is timestamp &&
+      data.updatedAt is timestamp;
+    }
+
+    match /users/{userId}/audits/{auditId} {
+      allow get: if isSignedIn() && isValidId(userId) && isValidId(auditId) && request.auth.uid == userId && existing().ownerUid == request.auth.uid;
+      allow list: if isSignedIn() && isValidId(userId) && request.auth.uid == userId && existing().ownerUid == request.auth.uid;
+      allow create: if isSignedIn() && isValidId(userId) && isValidId(auditId) && request.auth.uid == userId && isValidAuditRecord(incoming()) && incoming().createdAt == request.time && incoming().updatedAt == request.time && incoming().status == 'active';
+      allow update: if isSignedIn() && isValidId(userId) && isValidId(auditId) && request.auth.uid == userId && isValidAuditRecord(incoming()) && existing().ownerUid == request.auth.uid && existing().status != 'archived' && incoming().ownerUid == existing().ownerUid && incoming().createdAt == existing().createdAt && incoming().updatedAt == request.time && (
+        (incoming().diff(existing()).affectedKeys().hasOnly(['summary', 'grade', 'issuesFound', 'updatedAt'])) ||
+        (incoming().diff(existing()).affectedKeys().hasOnly(['status', 'updatedAt']) && incoming().status == 'archived')
+      );
+      allow delete: if isSignedIn() && isValidId(userId) && isValidId(auditId) && request.auth.uid == userId && existing().ownerUid == request.auth.uid;
+    }
+
+    match /users/{userId}/reviews/{reviewId} {
+      allow get: if isSignedIn() && isValidId(userId) && isValidId(reviewId) && request.auth.uid == userId && existing().ownerUid == request.auth.uid;
+      allow list: if isSignedIn() && isValidId(userId) && request.auth.uid == userId && existing().ownerUid == request.auth.uid;
+      allow create: if isSignedIn() && isValidId(userId) && isValidId(reviewId) && request.auth.uid == userId && isValidUserReview(incoming()) && incoming().createdAt == request.time && incoming().updatedAt == request.time && incoming().status == 'published';
+      allow update: if isSignedIn() && isValidId(userId) && isValidId(reviewId) && request.auth.uid == userId && isValidUserReview(incoming()) && existing().ownerUid == request.auth.uid && existing().status != 'archived' && incoming().ownerUid == existing().ownerUid && incoming().createdAt == existing().createdAt && incoming().updatedAt == request.time && (
+        (incoming().diff(existing()).affectedKeys().hasOnly(['rating', 'comment', 'authorName', 'updatedAt'])) ||
+        (incoming().diff(existing()).affectedKeys().hasOnly(['status', 'updatedAt']) && incoming().status == 'archived')
+      );
+      allow delete: if isSignedIn() && isValidId(userId) && isValidId(reviewId) && request.auth.uid == userId && existing().ownerUid == request.auth.uid;
+    }
+  }
+}

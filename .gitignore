@@ -1,0 +1,21 @@
+node_modules/
+build/
+dist/
+coverage/
+.DS_Store
+*.log
+
+# Environment variables and API keys
+.env
+.env.*
+.env*.local
+!.env.example
+*.key
+*.pem
+*api_key*
+*apikey*
+GEMINI_API_KEY*
+secrets.json
+
+# Playwright test artifacts
+.playwright-cli/

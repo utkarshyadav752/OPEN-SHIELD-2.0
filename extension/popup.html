@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>OpenShield Audit</title>
+  <style>
+    body {
+      width: 360px;
+      margin: 0;
+      padding: 16px;
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #0f172a;
+      color: #f8fafc;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #1e293b;
+      padding-bottom: 10px;
+      margin-bottom: 12px;
+    }
+    .title {
+      font-size: 16px;
+      font-weight: 800;
+      color: #38bdf8;
+    }
+    .grade-badge {
+      font-size: 20px;
+      font-weight: 900;
+      padding: 4px 12px;
+      border-radius: 8px;
+      background: #ef4444;
+      color: #fff;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .stat-card {
+      background: #1e293b;
+      padding: 8px 10px;
+      border-radius: 8px;
+      font-size: 12px;
+      border: 1px solid #334155;
+    }
+    .stat-card strong {
+      display: block;
+      font-size: 18px;
+      color: #f87171;
+    }
+    .roach-card {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 10px;
+      margin-bottom: 12px;
+      font-size: 11px;
+    }
+    .roach-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4px;
+      font-weight: 700;
+    }
+    .difficulty-tag {
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 10px;
+      text-transform: uppercase;
+      font-weight: 800;
+    }
+    .roach-link {
+      display: inline-block;
+      margin-top: 6px;
+      color: #38bdf8;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .section-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #94a3b8;
+      margin: 10px 0 6px;
+    }
+    ul {
+      margin: 0;
+      padding-left: 18px;
+      font-size: 12px;
+      color: #e2e8f0;
+      max-height: 110px;
+      overflow-y: auto;
+    }
+    li { margin-bottom: 4px; }
+    .btn {
+      width: 100%;
+      padding: 10px;
+      margin-top: 12px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+      background: #10b981;
+      color: #052e16;
+    }
+    .btn:hover { background: #34d399; }
+    .btn-secondary {
+      width: 100%;
+      padding: 9px;
+      margin-top: 8px;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 12px;
+      cursor: pointer;
+      background: #1e293b;
+      color: #f8fafc;
+    }
+    .btn-secondary:hover { background: #334155; }
+    .footer {
+      margin-top: 10px;
+      text-align: center;
+      font-size: 10px;
+      color: #64748b;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div>
+      <div class="title">🛡️ OpenShield</div>
+      <div style="font-size: 11px; color: #94a3b8;">100% Local DOM &amp; ToS Auditor</div>
+    </div>
+    <div id="grade" class="grade-badge">-</div>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <strong id="urgencyCount">0</strong>
+      ⏳ Fake Urgency
+    </div>
+    <div class="stat-card">
+      <strong id="sneakyCount">0</strong>
+      ☑️ Sneaky Boxes
+    </div>
+    <div class="stat-card">
+      <strong id="shamingCount">0</strong>
+      🎭 Guilt-Trip UI
+    </div>
+    <div class="stat-card">
+      <strong id="tosCount">0</strong>
+      📜 ToS Red Flags
+    </div>
+  </div>
+
+  <div id="roachMotelCard" class="roach-card" style="display: none;">
+    <div class="roach-header">
+      <span>🪳 Roach Motel / Cancellation</span>
+      <span id="roachDifficulty" class="difficulty-tag">HARD</span>
+    </div>
+    <div id="roachNotes" style="color: #cbd5e1; line-height: 1.4;"></div>
+    <a id="roachUrl" href="#" target="_blank" rel="noopener noreferrer" class="roach-link">
+      ↗ 1-Click Direct Unsubscribe Page
+    </a>
+  </div>
+
+  <div class="section-title">Predatory ToS &amp; Dark Pattern Logs</div>
+  <ul id="findingsList">
+    <li>Scanning current webpage...</li>
+  </ul>
+
+  <button id="neutralizeBtn" class="btn">⚡ Neutralize All Dark Patterns</button>
+  <button id="downloadJsonBtn" class="btn-secondary">⬇ Download Forensic Audit Report (JSON)</button>
+
+  <div class="footer">Open-Source Consumer Defense • Zero Cloud Tracking</div>
+  <script src="popup.js"></script>
+</body>
+</html>
